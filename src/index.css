@@ -7,3 +7,10 @@
   justify-content: center !important;
   
 } */
+
+.drawer a.active {
+  color: white;
+}
+.drawer a {
+  background-color: transparent;
+}

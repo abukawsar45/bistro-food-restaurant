@@ -1,17 +1,67 @@
-import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProviders";
+import { FaShoppingCart } from 'react-icons/fa';
+import useCart from "../../hooks/useCart";
+
 
 const Navbar = () => {
-const navOptions = (
-  
-    <>
-      <li>
-        <a><Link to='/'>Home</Link> </a>
-      </li>
-    <li><Link to='menu'>Our Menu</Link> </li>
-    <li><Link to='order'>Order Food</Link> </li>
-      
-    </>
+  const { user, logOut } = useContext(AuthContext);
+  // console.log(user)
+  const  [cart]  = useCart();
+  // console.log(cart)
+  // const user = false;
+  const handleLogOut=() => {
+    logOut()
+      .then()
+    .catch()
+  }
 
+const navOptions = (
+  <>
+    <li className='bg-yellow-100 gap-1 text-black'>
+      <a>
+        <NavLink to='/'>Home</NavLink>{' '}
+      </a>
+    </li>
+    <li className='bg-yellow-100 gap-1 text-black'>
+      <NavLink to='menu'>Our Menu</NavLink>{' '}
+    </li>
+    <li className='bg-yellow-100 gap-1 text-black'>
+      <NavLink to='order/salad'>Order Food</NavLink>{' '}
+    </li>
+    <li className='bg-yellow-100 gap-1 text-black'>
+      <NavLink to='secret'>secret</NavLink>{' '}
+    </li>
+    <li>
+      <NavLink className='btn gap-2 mr-2' to='/dashboard'>
+        <>
+          <FaShoppingCart className='text-xl' />
+          <div className='badge badge-secondary'>+{cart? cart.length : 0}</div>
+        </>
+      </NavLink>{' '}
+    </li>
+    {user ? (
+      <>
+        {' '}
+        <li>
+          <button onClick={handleLogOut} className='btn btn-danger'>
+            LogOut
+          </button>{' '}
+        </li>
+      </>
+    ) : (
+      <>
+        {' '}
+        <li className='bg-yellow-100 gap-1 text-black'>
+          <NavLink to='signUp'>SignUp</NavLink>{' '}
+        </li>
+        <li className='bg-yellow-100 gap-1 text-black'>
+          <NavLink to='login'>Login</NavLink>{' '}
+        </li>
+      </>
+    )}
+  </>
 );
 
   return (

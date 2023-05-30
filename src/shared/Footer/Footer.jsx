@@ -5,7 +5,7 @@ const Footer = () => {
   const now = new Date();
 
   const formattedDate = date.format(now, 'YYYY');
-  console.log(formattedDate);
+  // console.log(formattedDate);
 
   return (
     <footer>
